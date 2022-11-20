@@ -14,10 +14,8 @@ jobs:
         include:
           - dockerfile: ./backend1/Dockerfile
             name: backend1
-            context: ./backend1/
           - dockerfile: ./backend2/Dockerfile
             name: backend2
-            context: ./backend2/
     steps:
       - name: Checkout
         uses: actions/checkout@v3
@@ -28,8 +26,8 @@ jobs:
           username: mirel1
           password: ${{ secrets.DOCKER_TOKEN }}
       
-      - name: invoke docker buildx
-        uses: docker/setup-buildx-action@v2
+      #ß- name: invoke docker buildx
+      #ß  uses: docker/setup-buildx-action@v2
 
       - name: Docker meta
         id: meta
