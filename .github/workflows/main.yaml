@@ -14,10 +14,10 @@ jobs:
         include:
           - dockerfile: ./backend1/Dockerfile
             name: backend1
-            context: ./backend1
+            context: ./backend1/
           - dockerfile: ./backend2/Dockerfile
             name: backend2
-            context: ./backend2
+            context: ./backend2/
     steps:
       - name: Checkout
         uses: actions/checkout@v3
@@ -50,10 +50,9 @@ jobs:
       - name: Build and push
         uses: docker/build-push-action@v3
         with:
-          context: $${{ matrix.context }}
+          context: .
           file: ${{ matrix.dockerfile }}
           push: true
           tags: ${{ steps.meta.outputs.tags }}
-          labels: ${{ steps.meta.outputs.labels }}
-        
+          labels: ${{ steps.meta.outputs.labels }}        
       
