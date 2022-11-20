@@ -45,12 +45,17 @@ jobs:
             type=semver,pattern={{major}}
             type=sha        
       
-      - name: Build and push
-        uses: docker/build-push-action@v3
-        with:
-          context: .
-          file: ${{ matrix.dockerfile }}
-          push: true
-          tags: ${{ steps.meta.outputs.tags }}
-          labels: ${{ steps.meta.outputs.labels }}        
+      #- name: Build and push
+      #  uses: docker/build-push-action@v3
+      #  with:
+      #    context: .
+      #    file: ${{ matrix.dockerfile }}
+      #    push: true
+      #    tags: ${{ steps.meta.outputs.tags }}
+      #    labels: ${{ steps.meta.outputs.labels }}
+
+      - shell: bash
+        run: |
+          docker build -t mirel1/nginx-web:${{ matrix.name }}-${{ steps.meta.outputs.tags }} -f ${{ matrix.dockerfile }} .
+
       
