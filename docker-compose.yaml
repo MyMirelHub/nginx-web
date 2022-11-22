@@ -1,0 +1,25 @@
+
+services: 
+
+  backend1:
+    networks:
+      - default
+    image: mirel1/backend1:main
+    platform: linux/amd64
+
+  backend2:
+    platform: linux/amd64
+    networks:
+      - default
+    image: mirel1/backend2:main
+
+  haproxy:
+    image: haproxy
+    platform: linux/amd64
+    ports: 
+      - "8080:8080"
+    volumes: 
+      - ./haproxy/:/usr/local/etc/haproxy/
+networks:
+  backend:
+    driver: bridge
